@@ -7,7 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+	<header>
+		<div class="wrapper clearfix">
+			<div id="logo"><%= link_to 'eCommerce', root_path %> </div>
+			<div class="nav"></div>
+		</div>
+	</header>
+	<p class="notice"> <%= notice %></p>
+	<p class="alert"> <%= alert %></p>
 <%= yield %>
 
 </body>
