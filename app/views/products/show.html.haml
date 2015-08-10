@@ -1,0 +1,8 @@
+%h1 Product page
+%h3= @product.title
+%p= @product.link
+%p= @product.description
+
+= link_to 'Edit', edit_product_path(@product)
+= link_to 'Home', root_path
+= link_to 'Delete', product_path(@product), method: :delete, data: { confirm: 'Are you sure?'}
