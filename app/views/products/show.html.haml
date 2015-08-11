@@ -13,4 +13,16 @@
 			- if @product.user == current_user
 				= link_to 'Edit', edit_product_path(@product), class: 'data'
 				= link_to 'Delete', product_path(@product), method: :delete, data: { confirm: 'Are you sure?'}, class: 'data'
+		#random_product
+			%h3 Random Product
+			.product
+				.product_image
+					= link_to (image_tag @random_product.image.url(:small)), product_path(@random_product)
+				.product_content
+					.title
+						%h2= link_to @random_product.title, product_path(@random_product)		
+					.data.clearfix
+						%p.username
+							Added by
+							= @random_product.user.name	
 

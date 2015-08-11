@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
 	end
 
 	def show
-		
+		@random_product = Product.where.not(id: @product).order('RANDOM()').first
 	end
 
 	def new
