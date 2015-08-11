@@ -1,10 +1,16 @@
-= image_tag @product.image.url(:medium)
-%h1 Product page
-%h3= @product.title
-%p= @product.link
-%p= @product.description
-%p= @product.user.name
+#product_show
+	%h1= @product.title
+	%p.username
+		Added by
+		= @product.user.name
+		= time_ago_in_words(@product.created_at)
+	.clearfix
+		.product_image_description
+			= image_tag @product.image.url(:medium)
+			.description= simple_format(@product.description)
+		.product_data
+			= link_to 'Visit Link', @product.link, class: 'button'		
+			- if @product.user == current_user
+				= link_to 'Edit', edit_product_path(@product), class: 'data'
+				= link_to 'Delete', product_path(@product), method: :delete, data: { confirm: 'Are you sure?'}, class: 'data'
 
-= link_to 'Edit', edit_product_path(@product)
-= link_to 'Home', root_path
-= link_to 'Delete', product_path(@product), method: :delete, data: { confirm: 'Are you sure?'}
