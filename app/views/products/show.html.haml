@@ -9,7 +9,11 @@
 			= image_tag @product.image.url(:medium)
 			.description= simple_format(@product.description)
 		.product_data
-			= link_to 'Visit Link', @product.link, class: 'button'		
+			= link_to 'Visit Link', @product.link, class: 'button'
+			Price
+			= print_price(@product.price)
+			= print_stock(@product.stock)
+			= @product.stock	
 			- if @product.user == current_user
 				= link_to 'Edit', edit_product_path(@product), class: 'data'
 				= link_to 'Delete', product_path(@product), method: :delete, data: { confirm: 'Are you sure?'}, class: 'data'

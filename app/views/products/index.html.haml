@@ -19,6 +19,10 @@
 			.product_content	
 				.title
 					%h2= link_to product.title, product
+					Price:
+					= print_price(product.price)
+					= print_stock(product.stock)
+					
 					
 				
 				
