@@ -22,7 +22,7 @@
 					Price:
 					= print_price(product.price)
 					= print_stock(product.stock)
-				= link_to 'Add to cart', new_order_item_path(product_id: product.id)	
+				= button_to "Add to Cart", order_items_path(product_id: product.id)
 					
 				
 				
