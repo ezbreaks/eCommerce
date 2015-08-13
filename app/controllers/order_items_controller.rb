@@ -1,7 +1,7 @@
 class OrderItemsController < ApplicationController
-  before_action :load_order, only: [:create]
+  before_action :load_order, only: [:create, :destroy]
   before_action :set_order_item, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   # GET /order_items
   # GET /order_items.json
@@ -26,19 +26,18 @@ class OrderItemsController < ApplicationController
   # POST /order_items
   # POST /order_items.json
   def create
-    # @order_item = OrderItem.new(product_id: params[:product_id], order_id: @order.id)
-    @order_item = OrderItem.new(product_id: params[:product_id], order_id: @order.id)
+  @order_item = @order.order_items.new(quantity: 1, product_id: params[:product_id])
 
-    respond_to do |format|
-      if @order_item.save
-        format.html { redirect_to @order, notice: 'Successfully added product to cart.' }
-        format.json { render :show, status: :created, location: @order_item }
-      else
-        format.html { render :new }
-        format.json { render json: @order_item.errors, status: :unprocessable_entity }
-      end
+  respond_to do |format|
+    if @order_item.save
+      format.html { redirect_to @order, notice: 'Successfully added product to cart.' }
+      format.json { render action: 'show', status: :created, location: @order_item }
+    else
+      format.html { render action: 'new' }
+      format.json { render json: @order_item.errors, status: :unprocessable_entity }
     end
   end
+end
 
   # PATCH/PUT /order_items/1
   # PATCH/PUT /order_items/1.json
@@ -59,21 +58,21 @@ class OrderItemsController < ApplicationController
   def destroy
     @order_item.destroy
     respond_to do |format|
-      format.html { redirect_to order_items_url, notice: 'Order item was successfully destroyed.' }
+      format.html { redirect_to @order, notice: 'Order item was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
 
-   def load_order
-    begin
-      @order = Order.find(session[:order_id])
-    rescue ActiveRecord::RecordNotFound
-      @order = Order.create(status: "unsubmitted")
-      session[:order_id] = @order.id
-    end
+def load_order
+  begin
+    @order = Order.find(session[:order_id])
+  rescue ActiveRecord::RecordNotFound
+    @order = Order.create(status: "unsubmitted")
+    session[:order_id] = @order.id
   end
+end
 
 
 
