@@ -22,9 +22,9 @@ class OrdersController < ApplicationController
   end
 
   def empty
-    @order.destroy.all
+    @empty = @order.destroy.all
     respond_to do |format|
-      format.html { redirect_to products_path, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to products_url, notice: 'Order was successfully destroyed.' }
       format.json { head :no_content }
     end
   end               
@@ -64,7 +64,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to products_path, notice: 'Order was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

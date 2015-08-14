@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <p>
   <strong>User:</strong>
@@ -21,9 +21,9 @@
 	<%= number_to_currency(item.total_price) %>
 	<%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
-	<%= link_to "Empty Cart", @order, data: { confirm: 'Are you sure?' }, method: :delete %>
+	<%= link_to "Empty Cart", @empty, data: { confirm: 'Are you sure?' }, method: :delete %>
 
 	<%= number_to_currency(@order.total_price) %>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+<%= link_to 'Continue shopping', products_path %>
