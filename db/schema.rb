@@ -11,18 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814184840) do
-
-  create_table "addresses", force: :cascade do |t|
-    t.string   "line1"
-    t.string   "line2"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 20150813233732) do
 
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -42,7 +31,6 @@ ActiveRecord::Schema.define(version: 20150814184840) do
     t.string   "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "address_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -74,8 +62,6 @@ ActiveRecord::Schema.define(version: 20150814184840) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "name"
-    t.string   "provider"
-    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

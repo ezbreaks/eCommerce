@@ -74,7 +74,7 @@ end
 
 def load_order
   begin
-    @order = Order.find_by(session[:order_id])
+    @order = Order.find(session[:order_id])
   rescue ActiveRecord::RecordNotFound
     @order = Order.create(status: "unsubmitted")
     session[:order_id] = @order.id
