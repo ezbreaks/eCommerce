@@ -16,7 +16,7 @@
 <% @order.order_items.each do |item| %>
 	<p><%= image_tag(item.product.image(:verysmall)) %>
 	<p>Title <%= item.product.title %> </p>
-	<p>Quantity <%= item.quantity %> </p>
+	<p>Quantity <%= link_to item.quantity, edit_order_item_path(item) %> </p>
 	<p>Price <%= print_price(item.product.price) %> </p>
 	<%= number_to_currency(item.total_price) %>
 	<%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?' } %>
