@@ -11,6 +11,7 @@
   <strong>Status:</strong>
   <%= @order.status %>
 </p>
+<h2 style="float: right;">For a total of:<%= number_to_currency(@order.total_price) %> </h2>
 <hr>
 
 <% @order.order_items.each do |item| %>
@@ -18,12 +19,28 @@
 	<p>Title <%= item.product.title %> </p>
 	<p>Quantity <%= item.quantity %> </p>
 	<p>Price <%= print_price(item.product.price) %> </p>
-	<%= number_to_currency(item.total_price) %>
-	<%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?' } %>
+	<p>SubTotal <%= number_to_currency(item.total_price) %> <%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+	
 <% end %>
-	<%= link_to "Empty Cart", @empty, data: { confirm: 'Are you sure?' }, method: :delete %>
+	
 
-	<%= number_to_currency(@order.total_price) %>
+	
+<br>
+<tr>
+  <th>Shipping To:</th>
+  <td>
+    <%= form_for @order do |f| %>
+		<%= f.select :address_id, current_user.addresses.collect {|p| [ p.line1 , p.city, p.state, p.id ] } %>
+		<%= f.submit "Submit Order" %>
+    <% end %>
 
+  </td>
+</tr>
+
+
+
+<p><%= link_to 'Add Address', new_address_path %></p>
+
+<%= link_to "Empty Cart", @empty, data: { confirm: 'Are you sure?' }, method: :delete %>
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Continue shopping', products_path %>
