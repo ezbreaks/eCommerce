@@ -1,3 +1,3 @@
 class Cart < ActiveRecord::Base
-	has_many :orders
+	has_one :orders
 end

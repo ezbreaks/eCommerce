@@ -1,3 +1,4 @@
+#section
 - if user_signed_in?
 	%p#intro
 		Hello
@@ -15,16 +16,13 @@
 	- @products.each do |product|
 		.product
 			.product_image
-				= link_to (image_tag product.image.url(:small))
+				= link_to (image_tag product.image.url(:small)), product
 			.product_content	
 				.title
+					= button_to "Add to Cart", order_items_path(product_id: product.id)
 					%h2= link_to product.title, product
-					Price:
-					= print_price(product.price)
-					= print_stock(product.stock)
-				= button_to "Add to Cart", order_items_path(product_id: product.id)
+				.info	
+					%p.price= print_price(product.price)
+					%p.stock= print_stock(product.stock)
+					%p.stockNo= product.stock
 					
-				
-				
-
-	= link_to 'Add product', new_product_path	

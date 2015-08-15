@@ -13,8 +13,21 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    @order = Order.new
+    @order = Order.new(:express_token => params[:token])
   end
+
+ def express_checkout
+  response = EXPRESS_GATEWAY.setup_purchase(YOUR_TOTAL_AMOUNT_IN_CENTS,
+    return_url: YOUR_RETURN_URL_,
+    cancel_return_url: YOUR_CANCEL_RETURL_URL,
+    currency: "USD",
+    allow_guest_checkout: true,
+    items: [{name: "Order", description: "Order description", quantity: "1", amount: AMOUNT_IN_CENTS}]
+  )
+  redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
+end
+
+
 
   # GET /orders/1/edit
   def edit
@@ -35,21 +48,36 @@ class OrdersController < ApplicationController
 
   # POST /orders
   # POST /orders.json
-  def create
-    @order = Order.new(order_params)
+ 
+def create
+  @order = @cart.build_order(order_params)
 
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
-
+  if @order.save
+    if @order.purchase # this is where we purchase the order. refer to the model method below
+      redirect_to order_url(@order)
+    else
+      render :action => "failure"
     end
-
+  else
+    render :action => 'new'
   end
+end
+
+  # def create
+  #   @order = Order.new(order_params)
+
+  #   respond_to do |format|
+  #     if @order.save
+  #       format.html { redirect_to confirm_order_path(@order), notice: 'Order was successfully created.' }
+  #       format.json { render :show, status: :created, location: @order }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @order.errors, status: :unprocessable_entity }
+  #     end
+
+  #   end
+
+  # end
 
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json

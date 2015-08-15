@@ -131,5 +131,148 @@ header {
 	}
 }
 
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto 0; /* the bottom margin is the negative value of the footer's height */
+}
+.footer, .push {
+    height: 142px; /* .push must be the same height as .footer */
+}
+
+footer {
+    background-color: #E6E6E6;
+    padding: 82px;
+}
+
+footer p#intro a {
+    color: #B5B5B5;
+    text-decoration: none;
+    padding: 15px;
+    transition: .7s;
+}
+
+footer p#intro a:hover {
+
+    color: black;
+
+}
+
+input[type="submit"] {
+    float: right;
+    background-color: transparent;
+    border: 1px solid #E2E2E2;
+        padding: 18.5px;
+    text-transform: uppercase;
+    transition: .6s;
+}
+
+input[type="submit"]:hover {
+    background-color: black;
+    color: white;
+}
+
+.section {
+    background-color: black;
+    height: 500px;
+    background: url('/assets/background.jpg');
+    background-size: cover;
+    background-position: center center;
+
+}
+p.price {
+    float: right;
+    position: relative;
+    left: 115px;
+    padding: 15px;
+}
+
+.in_stock {
+    float: left;
+        margin-right: 5px;
+        padding: 15px;
+        padding-right: 0;
+}
+p.stockNo {
+    padding-top: 15px;
+}
+
+h2.priceTitle {
+    float: left;
+    padding-right: 15px;
+}
+
+p.price2 {
+    /* padding: 0px; */
+    font-size: 25px;
+        color: red;
+}
+
+.product_data .in_stock {
+    font-size: 22px;
+    padding: 0;
+}
+p.stocknumber {
+    font-size: 22px;
+    color: red;
+}
+
+p.imageCart {
+    float: left;
+    padding-right: 15px;
+        padding-top: 7px;
+}
+p.titleProd {
+    font-size: 25px;
+    color: black !important;
+}
+
+.productInfo p {
+    color: #A7A5A5;
+}
+
+ul.orderButons {
+    display: inline;
+    list-style: none;
+        margin-left: -41px;
+}
+
+ul.orderButons li {
+    display: inline;
+    padding: 15px 35px;
+    border: 2px solid #D0D0D0;
+    position: relative;
+    top: 37px;
+    text-decoration: none;
+    transition: .7s;
+}
+ul.orderButons li:hover {
+ 
+    background-color: black;
+}
+
+ul.orderButons li a {
+ 	color: black;
+ 	text-transform: uppercase;
+    text-decoration: none;
+}
+ul.orderButons li a:hover {
+ 	color: white;
+
+}
+/*
+
+Sticky Footer by Ryan Fait
+http://ryanfait.com/
+
+*/
+
 @import 'home.css.scss';
 @import 'products.css.scss';

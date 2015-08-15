@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814184840) do
+ActiveRecord::Schema.define(version: 20150815011759) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "line1"
@@ -25,8 +25,10 @@ ActiveRecord::Schema.define(version: 20150814184840) do
   end
 
   create_table "carts", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "total_amount_cents"
+    t.date     "purchased_at"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -40,9 +42,16 @@ ActiveRecord::Schema.define(version: 20150814184840) do
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "address_id"
+    t.integer  "cart_id"
+    t.string   "card_type"
+    t.date     "card_expires_on"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "express_token"
+    t.integer  "express_payer_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -58,6 +67,12 @@ ActiveRecord::Schema.define(version: 20150814184840) do
     t.datetime "image_updated_at"
     t.decimal  "price"
     t.integer  "stock",              default: 0
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "card_token"
   end
 
   create_table "users", force: :cascade do |t|

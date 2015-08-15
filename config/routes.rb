@@ -12,10 +12,15 @@ Rails.application.routes.draw do
   get 'static_pages/home'
 
   get 'static_pages/about'
-
+ 
   get 'static_pages/contact'
+  get 'registration/new'
 
   resources :products
+  resources :charges
+  resources :carts
+
+  get 'express_checkout' => 'order#express_checkout'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
